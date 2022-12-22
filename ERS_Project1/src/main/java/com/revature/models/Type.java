@@ -5,6 +5,8 @@ public class Type
     private int ticket_type_id;
     private String ticket_type_title;
 
+
+
     public Type(int ticket_type_id, String ticket_type_title) {
         this.ticket_type_id = ticket_type_id;
         this.ticket_type_title = ticket_type_title;

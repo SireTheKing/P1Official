@@ -65,7 +65,17 @@ public class Launcher
         app.get("/employees", ec.getEmployeeHandler);
         app.post("/employees", ec.insertEmployeeHandler);
 
+        //All URLs to ticket status'
+        // insert ticket
         app.post("/ticket", tc.insertTicketHandler);
+
+        // Approved tickets
+        app.get("/approvedtickets", tc.getApprovedTickets);
+        // Denied tickets
+        app.get("/deniedtickets", tc.getDeniedTickets);
+        // pending tickets
+        app.get("/pendingtickets", tc.getPendingTickets);
+
 
         // login endpoints
         app.post("/login", ac.loginHandler);

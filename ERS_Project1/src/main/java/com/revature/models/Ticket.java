@@ -37,6 +37,14 @@ public class Ticket
         this.ticket_description = ticket_description;
     }
 
+    public Ticket(int ticket_id, int ticket_amount, String ticket_description, int ticket_type_id_fk, int ticket_user_id_fk) {
+        this.ticket_id = ticket_id;
+        this.ticket_amount = ticket_amount;
+        this.ticket_description = ticket_description;
+        this.ticket_type_id_fk = ticket_type_id_fk;
+        this.ticket_user_id_fk = ticket_user_id_fk;
+    }
+
     public int getTicket_id() {
         return ticket_id;
     }

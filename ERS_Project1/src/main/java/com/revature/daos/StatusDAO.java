@@ -1,4 +1,6 @@
 package com.revature.daos;
 
-public class StatusDAO {
+public class StatusDAO
+{
+
 }
