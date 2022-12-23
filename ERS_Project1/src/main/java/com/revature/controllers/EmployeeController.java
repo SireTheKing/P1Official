@@ -44,7 +44,7 @@ public class EmployeeController
         }
         else {
             ctx.status(406);
-           ctx.result("Not Available");
+           ctx.result("Unavailable login");
 
         }
 

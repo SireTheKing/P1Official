@@ -55,22 +55,19 @@ public class TicketController
         if(AuthController.ses != null) {
             //
             int roleID = (Integer) AuthController.ses.getAttribute("user_role_id_fk");
-                if(roleID == 2)
-                {
-                    ArrayList<Ticket> tickets = tDAO.getPendingTicketByID(1);
+            if (roleID == 2) {
+                ArrayList<Ticket> tickets = tDAO.getPendingTicketByID(1);
 
-                    Gson gson = new Gson();
+                Gson gson = new Gson();
 
-                    String JSONTicket = gson.toJson(tickets);
+                String JSONTicket = gson.toJson(tickets);
 
-                    ctx.result(JSONTicket);
-                    ctx.status(202);
-                }
-                else
-                {
-                    ctx.result("You are not a manager");
-                    ctx.status(401);
-                }
+                ctx.result(JSONTicket);
+                ctx.status(202);
+            } else {
+                ctx.result("You are not a manager");
+                ctx.status(401);
+            }
         }
         else{
             ctx.result("You are not logged in ");
@@ -80,41 +77,69 @@ public class TicketController
 
     public Handler getApprovedTickets = (ctx) ->
     {
-        ArrayList<Ticket> tickets = appDAO.getTicketByID(2);
+        if(AuthController.ses != null) {
+            int roleID = (Integer) AuthController.ses.getAttribute("user_role_id_fk");
+            if (roleID == 2)
+            {
 
-        Gson gson = new Gson();
+                ArrayList<Ticket> tickets = appDAO.getTicketByID(2);
 
-        String JSONTicket = gson.toJson(tickets);
+                Gson gson = new Gson();
+
+                String JSONTicket = gson.toJson(tickets);
 
 
-        ctx.result(JSONTicket);
-        if(ctx.result(JSONTicket) != null) {
-            ctx.status(202);
+                ctx.result(JSONTicket);
+                if (ctx.result(JSONTicket) != null)
+                {
+                    ctx.status(202);
+                } else
+                {
+                    ctx.result("You are not logged in");
+                    ctx.status(401);
+                }
+
+            }
+            else
+            {
+                ctx.result("You are not a manager  ");
+                ctx.status(401);
+            }
         }
-        else {
-            ctx.status(404);
-        }
-
     };
 
     public Handler getDeniedTickets = (ctx) ->
     {
-        ArrayList<Ticket> tickets = DDAO.getTicketByID(3);
+        if(AuthController.ses != null) {
+            int roleID = (Integer) AuthController.ses.getAttribute("user_role_id_fk");
+            if (roleID == 2)
+            {
 
-        Gson gson = new Gson();
+                ArrayList<Ticket> tickets = DDAO.getTicketByID(3);
 
-        String JSONTicket = gson.toJson(tickets);
+                Gson gson = new Gson();
+
+                String JSONTicket = gson.toJson(tickets);
 
 
-        ctx.result(JSONTicket);
-        if(ctx.result(JSONTicket) != null) {
-            ctx.status(202);
+                ctx.result(JSONTicket);
+                if (ctx.result(JSONTicket) != null)
+                {
+                    ctx.status(202);
+                } else
+                {
+                    ctx.result("You are not logged in");
+                    ctx.status(401);
+                }
+
+            }
+            else
+            {
+                ctx.result("You are not a manager  ");
+                ctx.status(401);
+            }
         }
-        else {
-            ctx.status(404);
-        }
-
-    };
+        };
 
     public Handler insertTicketHandler = (ctx) ->
     {
