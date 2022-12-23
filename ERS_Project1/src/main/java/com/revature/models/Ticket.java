@@ -13,7 +13,9 @@ public class Ticket
     private int ticket_user_id_fk;
 
 
-
+    public Ticket(int ticket_user_id_fk) {
+        this.ticket_user_id_fk = ticket_user_id_fk;
+    }
 
     public Ticket()
     {

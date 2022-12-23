@@ -56,6 +56,7 @@ public class Launcher
         // rDAO.updateRole("i ant to update role_id_fk from ticket_user") if a manager
 
 
+
         //Instantiating controllers
         EmployeeController ec = new EmployeeController();
         AuthController ac = new AuthController();
@@ -76,6 +77,11 @@ public class Launcher
         // pending tickets
         app.get("/pendingtickets", tc.getPendingTickets);
 
+        //ticket history
+        app.get("usertickethistory", tc.userTicketHistory);
+
+        //Update ticket status
+        app.patch("/updatestatus/{ticket_id}", tc.updateStatus);
 
         // login endpoints
         app.post("/login", ac.loginHandler);

@@ -50,7 +50,7 @@ public class DeniedDAO implements TicketDAOInterface
     }
 
     @Override
-    public boolean InsertTicket(int amount, String description) {
+    public boolean InsertTicket(int amount, String description, int user_id) {
         return false;
     }
 }

@@ -4,48 +4,49 @@ import com.revature.models.Ticket;
 import com.revature.utils.ConnectionUtil;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
-public class ApprovedDAO implements TicketDAOInterface
+public class TicketHistoryDAO implements TicketDAOInterface
 {
 
     @Override
-    public ArrayList<Ticket> getTicketByID(int id)
-    {
-        try(Connection conn = ConnectionUtil.getConnection())
-        {
-            String sql = "select * from ticket where ticket_status_id_fk = 2;";
-            Statement s = conn.createStatement();//takes query
+    public ArrayList<Ticket> getTicketByID(int id) {
+        try(Connection conn = ConnectionUtil.getConnection()) {
+            String sql = " select * from ticket where ticket_user_id_fk = ? ;";
+            PreparedStatement ps = conn.prepareStatement(sql);
 
-            ResultSet rs = s.executeQuery(sql);
+            ps.setInt(1,id);
 
-            ArrayList<Ticket> ticketsList = new ArrayList<>();
+            ResultSet rs = ps.executeQuery();
 
-            while(rs.next())
+            ArrayList<Ticket> ticketlist = new ArrayList<>();
+
+            while (rs.next())
             {
-                Ticket t = new Ticket(
+                //instantiate the ticket object
+                Ticket ticket = new Ticket(
                         rs.getInt("ticket_id"),
                         rs.getInt("ticket_amount"),
                         rs.getString("ticket_description"),
+                        rs.getInt("ticket_status_id_fk"),
                         rs.getInt("ticket_type_id_fk"),
                         rs.getInt("ticket_user_id_fk")
                 );
 
-                ticketsList.add(t);
-
+                ticketlist.add(ticket);
             }
 
-            return ticketsList;
+            return ticketlist;
+
+
         }
         catch(SQLException e)
         {
             e.printStackTrace();
-            System.out.println("In the TicketDAO");
         }
-
         return null;
     }
 
@@ -53,5 +54,4 @@ public class ApprovedDAO implements TicketDAOInterface
     public boolean InsertTicket(int amount, String description, int user_id) {
         return false;
     }
-
 }

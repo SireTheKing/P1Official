@@ -7,10 +7,12 @@ import com.revature.models.Employee;
 import com.revature.models.LoginDTO;
 import io.javalin.http.Handler;
 
+import javax.servlet.http.HttpSession;
+
 public class AuthController
 {
     AuthDAO aDAO = new AuthDAO();
-
+    public static HttpSession ses;
     //login is a post request
     public Handler loginHandler = (ctx) ->
     {
@@ -25,6 +27,9 @@ public class AuthController
 
         if(loggedInEmployee != null )
         {
+            ses = ctx.req.getSession();
+            ses.setAttribute("user_role_id_fk", loggedInEmployee.getRole_id_fk());
+            ses.setAttribute("user_id", loggedInEmployee.getUser_id());
 
             String userJSON = gson.toJson(loggedInEmployee);
             ctx.result(userJSON);

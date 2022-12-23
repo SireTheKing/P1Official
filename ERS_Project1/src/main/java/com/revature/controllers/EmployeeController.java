@@ -44,7 +44,8 @@ public class EmployeeController
         }
         else {
             ctx.status(406);
-            ctx.result(body);
+           ctx.result("Not Available");
+
         }
 
 

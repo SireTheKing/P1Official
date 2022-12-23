@@ -2,20 +2,20 @@ package com.revature.models;
 
 public class TicketDTO
 {
-    private int amount;
+    private Integer amount;
     private String description;
 
-    public TicketDTO(int amount, String description)
+    public TicketDTO(Integer amount, String description)
     {
         this.amount = amount;
         this.description = description;
     }
 
-    public int getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(Integer amount) {
         this.amount = amount;
     }
 
